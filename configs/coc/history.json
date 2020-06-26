@@ -1,0 +1,74 @@
+{
+  "links": {
+    "%2Fhome%2Fralph%2Fc%2B%2B%2FCodeForces%2F12%2Fc": [
+      "/s"
+    ]
+  },
+  "symbols": {
+    "%2Fhome%2Fralph%2Fc%2B%2B%2FCodeForces%2F12%2Fc": [
+      "fruit"
+    ],
+    "%2Fhome%2Fralph": [
+      "undo"
+    ]
+  },
+  "lists": {
+    "%2Fhome%2Fralph": [
+      "sy",
+      "output",
+      "tem"
+    ],
+    "%2Fhome%2Fralph%2Fc%2B%2B%2FCodeForces%2Fcf%2Fcontest%2F12%2Fc": [
+      "ex"
+    ],
+    "%2Fhome%2Fralph%2FDocuments": [
+      "ext",
+      "dia"
+    ],
+    "%2Fhome%2Fralph%2F": {
+      "config%2Fnvim%2Fplugged%2Fcoc": {
+        "nvim": [
+          "tem"
+        ]
+      }
+    },
+    "%2Fhome%2Fralph%2Fautoconfig": [
+      "temp"
+    ]
+  },
+  "output": {
+    "%2Fhome%2Fralph": [
+      "highlight"
+    ]
+  },
+  "extensions": {
+    "%2Fhome%2Fralph%2Fc%2B%2B%2FCodeForces%2Fcf%2Fcontest%2F12%2Fc": [
+      "qq"
+    ]
+  },
+  "templates": {
+    "%2Fhome%2Fralph": [
+      ".bash",
+      "bash"
+    ],
+    "%2Fhome%2Fralph%2F": {
+      "config%2Fnvim%2Fplugged%2Fcoc": {
+        "nvim": [
+          "q",
+          "=template=.bash"
+        ]
+      },
+      "config%2Fnvim": [
+        "ope"
+      ]
+    },
+    "%2Fhome%2Fralph%2Fautoconfig": [
+      "bash"
+    ]
+  },
+  "commands": {
+    "%2Fhome%2Fralph%2Fautoconfig": [
+      "`"
+    ]
+  }
+}

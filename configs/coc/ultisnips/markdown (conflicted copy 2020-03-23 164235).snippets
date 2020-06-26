@@ -1,0 +1,178 @@
+global !p
+texMathZones = ['texMathZone'+x for x in ['A', 'AS', 'B', 'BS', 'C',
+'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS',
+'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z']]
+
+texIgnoreMathZones = ['texMathText']
+
+texMathZoneIds = vim.eval('map('+str(texMathZones)+", 'hlID(v:val)')")
+texIgnoreMathZoneIds = vim.eval('map('+str(texIgnoreMathZones)+", 'hlID(v:val)')")
+
+ignore = texIgnoreMathZoneIds[0]
+
+def math():
+    synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
+    try:
+        first = next(
+            i for i in reversed(synstackids)
+            if i in texIgnoreMathZoneIds or i in texMathZoneIds
+        )
+        return first != ignore
+    except StopIteration:
+        return False
+endglobal
+# A valid snippet should starts with
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+context "math()"
+snippet // "Fraction" iA
+\\frac{$1}{$2}$0
+endsnippet
+
+snippet lmt "Line math in Markdown" wA
+$${1}$
+endsnippet
+
+snippet fmt "Full math in markdown" wA
+$$
+${1:${VISUAL}}
+$$ $0
+endsnippet
+
+context "math()"
+snippet '([A-Za-z])(\d)' "auto subscript" wrA
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+endsnippet
+
+context "math()"
+snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "Fraction" wrA
+\\frac{`!p snip.rv = match.group(1)`}{$1}$0
+endsnippet
+
+snippet '(?<!\\)([0-9])([0-9])tbl' "new table" wrA
+$1`!p 
+x=match.group(1)
+y=match.group(2)
+row1=""
+row2="" 
+for i in range(int(x)):
+    row1+="| "
+    row2+="|:-:"
+row1+="|\n"
+row2+="|\n"
+out=row1+row2+int(y)*row1
+snip.rv=out
+`$0
+endsnippet
+
+context "math()"
+snippet ooo "Infinity" wA
+\infin
+endsnippet
+
+snippet beg "begin{} / end{}" bA
+\begin{$1}
+    $0
+\end{$1}
+endsnippet
+
+context "math()"
+snippet arsdn "Arrow Down Single" wrA
+downarrow
+endsnippet
+
+context "math()"
+snippet arddn "Arrow Down Double" wrA
+Downarrow
+endsnippet
+
+context "math()"
+snippet arsup "Arrow Up Single" wrA
+uparrow
+endsnippet
+context "math()"
+snippet ardup "Arrow Up Double" wrA
+Uparrow
+endsnippet
+
+context "math()"
+snippet arsle "Arrow Left Single" wrA
+leftarrow
+endsnippet
+context "math()"
+snippet ardup "Arrow Left Double" wrA
+Leftarrow
+endsnippet
+
+context "math()"
+snippet arsri "Arrow Right Single" wrA
+rightarrow
+endsnippet
+context "math()"
+snippet ardri "Arrow Right Double" wrA
+Rightarrow
+endsnippet
+
+
+context "math()"
+snippet temp "Celsius" wriA
+^{\circ}C
+endsnippet
+priority 1000
+context "math()"
+snippet '^.*\)/' "() Fraction" wrA
+`!p
+stripped = match.string[:-1]
+depth = 0
+i = len(stripped) - 1
+while True:
+    if stripped[i] == ')': depth += 1
+    if stripped[i] == '(': depth -= 1
+    if depth == 0: break;
+    i -= 1
+snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
+`{$1}$0
+endsnippet
+
+context "math()"
+snippet td "superscript" iA
+^{$1}$0
+endsnippet
+
+snippet udr "underline font" wrA
+<u>$1</u>$0
+endsnippet
+
+snippet bdf "bold font" wrA
+**$1**$0
+endsnippet
+
+snippet itl "Italic font" wrA
+*$1*$0
+endsnippet
+
+snippet dlin "Delete Line" wrA
+~~$0~~
+endsnippet

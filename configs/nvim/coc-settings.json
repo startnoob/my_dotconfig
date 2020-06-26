@@ -1,0 +1,27 @@
+{
+    "languageserver": {
+        "ccls": {
+            "command": "clangd",
+            "filetypes": ["c", "cpp", "objc", "objcpp"],
+            "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
+            }
+        },
+        "bash": {
+            "command": "bash-language-server",
+            "args": ["start"],
+            "filetypes": ["sh"],
+            "ignoredRootPaths": ["~"]
+        }
+    },
+    "markdownlint.config": {
+        "default": true,
+        "line_length": false,
+        "no-hard-tabs": false,
+        "no-trailing-spaces": false,
+        "ul-indent": false
+    }
+}
